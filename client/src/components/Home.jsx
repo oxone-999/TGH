@@ -4,16 +4,19 @@ import axios from "axios";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Home() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [quote, setQuote] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   const response = async () => {
+    setLoading(true);
     const res = await axios.get(`${API_URL}/random`);
+    setLoading(false);
     setQuote(res.data);
     console.log("res", res.data);
     return res.data;
@@ -38,6 +41,8 @@ function Home() {
   return (
     <div className={Styles.home}>
       <div className={Styles.quoteContainer}>
+      {loading ? (<div>Loading...</div>) : (
+        <>
         <div className={Styles.quote}>
           <p>{quote.content}</p>
         </div>
@@ -65,12 +70,12 @@ function Home() {
                 content: quote.content,
                 author: quote.author,
               });
-
-              console.log("existingData", existingData);
               localStorage.setItem("bookmark", JSON.stringify(existingData));
             }}
           />
         </div>
+        </>
+      )}
       </div>
       <div className={Styles.button}>
         <button onClick={handleQuote}>Next Quote</button>
