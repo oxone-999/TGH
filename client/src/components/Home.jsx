@@ -27,7 +27,7 @@ function Home() {
     const getQuote = async () => {
       try {
         const res = await response();
-        console.log(res);
+        console.log("res", res);
       } catch (err) {
         console.log(err);
       }
@@ -48,8 +48,26 @@ function Home() {
           <BookmarksIcon
             style={{ color: "white" }}
             onClick={() => {
-              dispatch({ type: "ADD_BOOKMARK", payload: quote }),
-                toast.success("Quote added to bookmarks");
+              // dispatch({ type: "ADD_BOOKMARK", payload: quote });
+              toast.success("Quote added to bookmarks");
+
+              const existingDataString = localStorage.getItem("bookmark");
+              let existingData = existingDataString
+                ? JSON.parse(existingDataString)
+                : [];
+
+              if (!Array.isArray(existingData)) {
+                existingData = [];
+              }
+
+              existingData.push({
+                _id: quote._id,
+                content: quote.content,
+                author: quote.author,
+              });
+
+              console.log("existingData", existingData);
+              localStorage.setItem("bookmark", JSON.stringify(existingData));
             }}
           />
         </div>

@@ -20,17 +20,29 @@
 }
 
 .quote{
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #fff;
     text-align: center;
-    padding: 1rem;
 }
 
 .author{
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: #fff;
     text-align: center;
-    padding: 1rem;
+}
+
+.button button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    background-color: #7bff7e;
+    border: none;
+    padding: 0.7rem;
+    color:#787878;
+    font-size: 1rem;
+    font-weight: 800;
 }
